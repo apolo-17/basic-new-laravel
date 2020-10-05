@@ -55,7 +55,7 @@
                         @endif
                         @else
                         <li class="nav-item">
-                            <a href="{{ route('posts.index') }}" class="nav-link">
+                            <a href="{{ route('project.index') }}" class="nav-link">
                                 Articulos
                             </a>
                         <li class="nav-item dropdown">

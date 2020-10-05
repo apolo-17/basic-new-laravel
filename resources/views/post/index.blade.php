@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Articulos
-                    <a href="{{route('posts.index')}}" class="btn btn-sm btn-primary float-right">Crear</a>
+                    <a href="{{route('project.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
                 </div>
 
                 <div class="card-body">
@@ -17,7 +17,35 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>titulo</th>
+                                <th colspan="2">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($posts as $post)
+                            <tr>
+                                <td>{{ $post->id }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>
+                                    <a href="{{ route('project.edit',$post) }}"
+                                        class="btn btn-primary btn-sm">Editar</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('project.destroy',$post) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" value="Eliminar" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Desea elminar ?')">
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
