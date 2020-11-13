@@ -31,7 +31,7 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
-                                    <a href="{{ route('project.edit',$post) }}"
+                                    <a href="{{ route('project.edit', $post) }}"
                                         class="btn btn-primary btn-sm">Editar</a>
                                 </td>
                                 <td>
@@ -46,6 +46,7 @@
                             @endforeach
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

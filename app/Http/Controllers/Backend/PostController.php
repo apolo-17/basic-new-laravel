@@ -66,10 +66,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($post)
     {
-        return $post;
-        return view('post.edit');
+        //$post = Post::find($post);
+        return view('post.edit', ['post' => Post::find($post)]);
     }
 
     /**
