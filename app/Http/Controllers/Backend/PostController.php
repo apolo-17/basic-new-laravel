@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -68,8 +69,8 @@ class PostController extends Controller
      */
     public function edit($post)
     {
-        //$post = Post::find($post);
         return view('post.edit', ['post' => Post::find($post)]);
+
     }
 
     /**
@@ -79,9 +80,18 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, $post)
     {
-        //
+
+        Post::find($post)->update($request->all());
+
+        if ($request->file('file')) {
+            $post_update = Post::find($post);
+            Storage::disk('public')->delete($post_update->image);
+            $post_update->image = $request->file('file')->store('posts', 'public');
+            $post_update->save();
+        }
+        return back()->with('status', 'Actualizado con exito !!!');
     }
 
     /**
@@ -90,8 +100,12 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($post)
     {
-        //
+        $post_delete_image = Post::find($post);
+        Storage::disk('public')->delete($post_delete_image->image);
+        Post::find($post)->delete();
+
+        return back()->with('status', 'Eliminado con exito...');
     }
 }
