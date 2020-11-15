@@ -16,7 +16,7 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('project.update', $post) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('post.update', $post) }}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Titulo *</label>
                             <input type="text" name="title" class="form-control" required

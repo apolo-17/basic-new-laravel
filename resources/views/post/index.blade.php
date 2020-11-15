@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Articulos
-                    <a href="{{route('project.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
+                    <a href="{{route('post.create')}}" class="btn btn-sm btn-primary float-right">Crear</a>
                 </div>
 
                 <div class="card-body">
@@ -31,11 +31,11 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
-                                    <a href="{{ route('project.edit', $post) }}"
+                                    <a href="{{ route('post.edit', $post->id) }}"
                                         class="btn btn-primary btn-sm">Editar</a>
                                 </td>
                                 <td>
-                                    <form action="{{ route('project.destroy',$post) }}" method="POST">
+                                    <form action="{{ route('post.destroy',$post) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <input type="submit" value="Eliminar" class="btn btn-sm btn-danger"
